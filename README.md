@@ -1,6 +1,14 @@
+# NAME : VISWAJITH LALITHRAM R.V
+# REG.NO : 212224240187
+
+---
+
 # 4.Execution_of_NetworkCommands
+---
 ## AIM :Use of Network commands in Real Time environment
+---
 ## Software : Command Prompt And Network Protocol Analyzer
+---
 ## Procedure: To do this EXPERIMENT- follows these steps:
 <BR>
 In this EXPERIMENT- students have to understand basic networking commands e.g cpdump, netstat, ifconfig, nslookup ,traceroute and also Capture ping and traceroute PDUs using a network protocol analyzer 
@@ -25,8 +33,65 @@ This commands includes
 <BR>
 • Other IP Commands e.g. show ip route etc.
 <BR>
+---
 
-## Output
+PROGRAM :
 
-## Result
+CLIENT
+```
+import socket
+from pythonping import ping
+s=socket.socket()
+s.bind(('localhost',8000))
+s.listen(5)
+c,addr=s.accept()
+while True:
+hostname=c.recv(1024).decode()
+try:
+c.send(str(ping(hostname, verbose=False)).encode())
+except KeyError:
+c.send("Not Found".encode())
+```
+
+SERVER
+```
+import socket
+s=socket.socket()
+s.connect(('localhost',8000))
+while True:
+ip=input("Enter the website you want to ping ")
+s.send(ip.encode())
+print(s.recv(1024).decode())
+```
+
+TRACEROUTE COMMAND
+```
+from scapy.all import*
+target = ["www.google.com"]
+result, unans = traceroute(target,maxttl=32)
+print(result,unans)
+```
+
+---
+
+## Output :
+
+CLIENT 
+
+![Screenshot 2025-05-16 170239](https://github.com/user-attachments/assets/f84b3144-0488-44bc-961f-cc37b9a094ff)
+
+
+SERVER
+
+![Screenshot 2025-05-16 170301](https://github.com/user-attachments/assets/2c652fcd-ac49-4274-b8c9-db0f65810a41)
+
+
+TRACEROUTE COMMAND
+
+![Screenshot 2025-05-16 170323](https://github.com/user-attachments/assets/dd276961-ab90-45d1-ac36-a7101e99b9e6)
+
+
+---
+
+## Result :
 Thus Execution of Network commands Performed 
